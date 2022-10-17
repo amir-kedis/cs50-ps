@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <title>Trivia!</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+
+            // select all choices
+            const btns = document.querySelectorAll(".btn");
+
+            function alert(el, color, text) {
+                el.style.backgroundColor = color;
+                const msg = (el.parentElement.querySelector("p")) || document.createElement("p");
+                msg.textContent = text;
+                el.parentElement.appendChild(msg);
+            }
+
+            for (let btn of btns) {
+                btn.addEventListener("click", () => {
+                    btn.classList.contains("correct")
+                        ? alert(btn, "green", "Correct!")
+                        : alert(btn, "red", "Incorrect");
+                })
+            }
+
+
+            // Free Response
+
+            const foodForm = document.querySelector("form");
+
+            foodForm.addEventListener("submit", (e) => {
+                if (foodForm[0].value === "ramen") {
+                    alert(foodForm[1], "green", "Correct!")
+                    foodForm[0].style.color = "green"
+                } else {
+                    alert(foodForm[1], "red", "Incorrect")
+                    foodForm[0].style.color = "red"
+                }
+                e.preventDefault()
+            })
+        })
+
+
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Trivia!</h1>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>Part 1: Multiple Choice </h2>
+            <hr>
+            <!-- TODO: Add multiple choice question here -->
+            <h3>
+                What is your favorite anime?
+            </h3>
+            <button class="btn correct">Kaguya sama</button>
+            <button class="btn">One Piece</button>
+            <button class="btn">Konan</button>
+        </div>
+
+        <div class="section">
+            <h2>Part 2: Free Response</h2>
+            <hr>
+            <!-- TODO: Add free response question here -->
+            <h3>
+                What is Amir's favourite food?
+            </h3>
+            <form>
+                <input type="text" id="food-input">
+                <button type="submit" id="food-btn">Sure?</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

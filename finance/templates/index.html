@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+INDEX
+{% endblock %}
+
+{% block main %}
+<h1>YOUR SHARES</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>shares</th>
+            <th>price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in database %}
+        <tr>
+            <th scope="row">{{ row["symbol"] }}</th>
+            <td>{{ row["shares"] }}</td>
+            <td>{{ row["price"] | usd}}</td>
+            <td>{{ (row["shares"] * row["price"]) | usd}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfooter>
+        <tr>
+            <td></td>
+            <td></td>
+            <th>Cash</th>
+            <td>{{ cash | usd}}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <th>Total Value</th>
+            <td>{{ (shares_value + cash) | usd}}</td>
+        </tr>
+    </tfooter>
+</table>
+{% endblock %}
